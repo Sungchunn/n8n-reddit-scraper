@@ -1,0 +1,2746 @@
+{
+  "name": "Reddit Scraper Demo",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        1600
+      ],
+      "id": "62ded02f-fae4-426c-8a74-c0004d456cb3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "subreddit": "n8n",
+        "keyword": "n8n",
+        "limit": 15,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        1900
+      ],
+      "id": "982d4713-aa5f-419b-b8ee-d42bf399bccd",
+      "name": "Reddit",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "quDthxXy7bGClrz9",
+          "name": "n8n Reddit Connection"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Reddit: \"Search for a post\" node\n1. Visit: [Reddit Developer Apps](https://www.reddit.com/prefs/apps)\n2. Create an App\n",
+        "height": 1060,
+        "width": 340,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        1020
+      ],
+      "id": "3a42d52c-bfb1-4322-af9a-eafb6751f9dd",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -520,
+        1400
+      ],
+      "id": "09dcee7a-54b5-49ab-8769-68e4adfdc13e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "subreddit": "n8n",
+        "keyword": "n8n workflow examples",
+        "limit": 15,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        1660
+      ],
+      "id": "c4a56039-522c-4b37-a5b4-a9d9b9ad3a9d",
+      "name": "Reddit \"n8n workflow examples\"",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "quDthxXy7bGClrz9",
+          "name": "n8n Reddit Connection"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "subreddit": "n8n",
+        "keyword": "n8n best practices",
+        "limit": 15,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        1440
+      ],
+      "id": "7dfc45af-34ce-4f46-aa70-680c18f83615",
+      "name": "Reddit \"n8n best practices\"",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "quDthxXy7bGClrz9",
+          "name": "n8n Reddit Connection"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "subreddit": "n8n",
+        "keyword": "n8n real-world project",
+        "limit": 15,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        1220
+      ],
+      "id": "0076c2ff-ffd8-4d3c-8a23-e3a244dedfd0",
+      "name": "Reddit \"n8n real-world project\"",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "quDthxXy7bGClrz9",
+          "name": "n8n Reddit Connection"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d1e00130-e141-4493-9bdd-f082785c371e",
+              "leftValue": "={{ $json.ups }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        520,
+        1200
+      ],
+      "id": "ad8b89fa-3f07-4ad0-815e-011e44b4eca3",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "07b904ca-d40b-4fcb-9fe1-c5aa15fbeba1",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "4228709f-c1f6-47ad-a952-d13a34cc52fc",
+              "name": "selftext",
+              "value": "={{ $json.selftext }}",
+              "type": "string"
+            },
+            {
+              "id": "ebed9b79-bfd9-42ea-b8f6-afdf14201fc6",
+              "name": "ups",
+              "value": "={{ $json.ups }}",
+              "type": "number"
+            },
+            {
+              "id": "3fbd5632-2d7d-4a71-ab06-fe2448c79947",
+              "name": "num_comments",
+              "value": "={{ $json.num_comments }}",
+              "type": "number"
+            },
+            {
+              "id": "a3cdf1af-9d59-49c9-8768-fedb973fbe9a",
+              "name": "url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        340,
+        1560
+      ],
+      "id": "22a66d91-9efd-40f0-ab41-cc10b263430d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an expert in no-code tools and automation, especially in n8n workflows and use-cases.\n\nHere is a Reddit post:\nTitle: \"{{ $json.title }}\"\nBody: \"{{ $json.selftext }}\"\n\nDetermine:\n- Is this post useful for someone who is learning n8n and trying to understand real-world applications, use-cases, or tips?\n- Only mark **yes** if the post discusses practical use-cases, technical questions, solutions, tutorials, workflows, best practices, or common mistakes in n8n.\n- If it's just a meme, joke, general business talk, or non-technical discussion, mark **no**.\n\nOutput:\nRespond with only \"yes\" or \"no\" — no explanations, no extra text."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        760,
+        1560
+      ],
+      "id": "34656b68-33c0-48a0-8deb-26b41cb3f22a",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "NXPihSabo7xdObkc",
+          "name": "Tutorial "
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8615cfc2-0a2c-4d08-a4ca-ed56babadff5",
+              "leftValue": "={{ $json.message.content }}",
+              "rightValue": "yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1140,
+        1220
+      ],
+      "id": "1877cad1-d99c-4b64-99e8-dec2ca3fa0ba",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=🚀 **{{ $('Edit Fields').item.json.title }}**\n\n{{ $('Edit Fields').item.json.selftext }}\n\n👍 Upvotes: {{ $('Edit Fields').item.json.ups }} | 💬 Comments: {{ $('Edit Fields').item.json.num_comments }}\n\n🔗 [Read more here]({{ $('Edit Fields').item.json.url }})",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        1540
+      ],
+      "id": "2753f60d-555e-43ba-85a7-19f5e672730e",
+      "name": "Discord",
+      "webhookId": "89650413-8825-4952-a864-1307a952f35c",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "Bvt2WWOrLdXAryj8",
+          "name": "Discord Webhook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## ChatGPT Prompt\n\nYou are an expert in no-code tools and automation, especially in n8n workflows and use-cases.\n\nHere is a Reddit post:\n`Title: \"{{ $json.title }}\"`\n`Body: \"{{ $json.selftext }}\"`\n\nDetermine:\n- Is this post useful for someone who is learning n8n and trying to understand real-world applications, use-cases, or tips?\n\n- Only mark **yes** if the post discusses practical use-cases, technical questions, solutions, tutorials, workflows, best practices, or common mistakes in n8n.\n\n- If it's just a meme, joke, general business talk, or non-technical discussion, mark **no**.\n\nOutput:\nRespond with only \"yes\" or \"no\" — no explanations, no extra text.\n",
+        "height": 440,
+        "width": 980,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        360,
+        1780
+      ],
+      "id": "3cc0ad31-4eaf-49f6-9453-a681ef39b7f5",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {
+    "Reddit": [
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "I see a lot of posts on here of people trying to make money with n8n so I wanted to chime in\n\nI just secured my 10th contract for $2500/month to build an manage workflows for businesses \n\nI do not sell any specific solution, instead I offer AI and automation management as a service and I sell it for $2500 per month and as of next week I will have 10 clients\n\nI position myself as their AI and automation partner/expert and use n8n to build the workflows.\n\nI use the data provider Apollo to find leads and I make cold calls all day. \n\nUsually about 60 to 80 phone calls a day offering a free consultation to go over areas they could automate or use AI. \n\nThen during the consultation I look for those areas to automate or add AI and sell them on a workflow. \n\nThen the monthly fee covers the management of the workflow in addition to building out other workflows \n\nI’ve owned a marketing agency for 10 years but recently pivoted to AI, and I started my AI agency just over four months ago and am now at $25k/MRR\n\nIt’s very possible to do if you have sales skills \n\nI’m happy to answer any questions in the thread below  ",
+          "author_fullname": "t2_1ns07wwzqz",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "I just hit $25,000/MRR in 4 months with n8n",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1kki6u5",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.98,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 1868,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": "Discussion",
+          "can_mod_post": false,
+          "score": 1868,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": 1747191197,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1747018337,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;I see a lot of posts on here of people trying to make money with n8n so I wanted to chime in&lt;/p&gt;\n\n&lt;p&gt;I just secured my 10th contract for $2500/month to build an manage workflows for businesses &lt;/p&gt;\n\n&lt;p&gt;I do not sell any specific solution, instead I offer AI and automation management as a service and I sell it for $2500 per month and as of next week I will have 10 clients&lt;/p&gt;\n\n&lt;p&gt;I position myself as their AI and automation partner/expert and use n8n to build the workflows.&lt;/p&gt;\n\n&lt;p&gt;I use the data provider Apollo to find leads and I make cold calls all day. &lt;/p&gt;\n\n&lt;p&gt;Usually about 60 to 80 phone calls a day offering a free consultation to go over areas they could automate or use AI. &lt;/p&gt;\n\n&lt;p&gt;Then during the consultation I look for those areas to automate or add AI and sell them on a workflow. &lt;/p&gt;\n\n&lt;p&gt;Then the monthly fee covers the management of the workflow in addition to building out other workflows &lt;/p&gt;\n\n&lt;p&gt;I’ve owned a marketing agency for 10 years but recently pivoted to AI, and I started my AI agency just over four months ago and am now at $25k/MRR&lt;/p&gt;\n\n&lt;p&gt;It’s very possible to do if you have sales skills &lt;/p&gt;\n\n&lt;p&gt;I’m happy to answer any questions in the thread below  &lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "0aa736a6-1bc8-11f0-96d8-ee819510d4fb",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "transparent",
+          "id": "1kki6u5",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "eeko_systems",
+          "discussion_type": null,
+          "num_comments": 624,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1kki6u5/i_just_hit_25000mrr_in_4_months_with_n8n/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1kki6u5/i_just_hit_25000mrr_in_4_months_with_n8n/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1747018337,
+          "num_crossposts": 2,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "",
+          "author_fullname": "t2_1n7nl4ch83",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "I made an n8n Cheat Sheet!",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": 98,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1jy1wdc",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.99,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 1843,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": true,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 1843,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://b.thumbs.redditmedia.com/bvFZAL93gdXys88cut6tj9Mwm6q6AUTU0X8PKr0AzdU.jpg",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "image",
+          "content_categories": null,
+          "is_self": false,
+          "mod_note": null,
+          "created": 1744527967,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "i.redd.it",
+          "allow_live_comments": false,
+          "selftext_html": null,
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://i.redd.it/w4ult2xaxjue1.png",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://preview.redd.it/w4ult2xaxjue1.png?auto=webp&amp;s=368c173a92323f31595c3fb93f722f74d40d2b09",
+                  "width": 2245,
+                  "height": 1587
+                },
+                "resolutions": [
+                  {
+                    "url": "https://preview.redd.it/w4ult2xaxjue1.png?width=108&amp;crop=smart&amp;auto=webp&amp;s=70474caff81b629567f5cf600808a6c620074117",
+                    "width": 108,
+                    "height": 76
+                  },
+                  {
+                    "url": "https://preview.redd.it/w4ult2xaxjue1.png?width=216&amp;crop=smart&amp;auto=webp&amp;s=af9dc69444c7c1c55f3f0137337bfaf05b5ae4ac",
+                    "width": 216,
+                    "height": 152
+                  },
+                  {
+                    "url": "https://preview.redd.it/w4ult2xaxjue1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=c7b169007703558b8989189c1c029091cff59fda",
+                    "width": 320,
+                    "height": 226
+                  },
+                  {
+                    "url": "https://preview.redd.it/w4ult2xaxjue1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=b5228bbde0e8a169f67ce8adac0ccf60eef0511b",
+                    "width": 640,
+                    "height": 452
+                  },
+                  {
+                    "url": "https://preview.redd.it/w4ult2xaxjue1.png?width=960&amp;crop=smart&amp;auto=webp&amp;s=00c30420abd5e953cef5a3a25805c7e61090978b",
+                    "width": 960,
+                    "height": 678
+                  },
+                  {
+                    "url": "https://preview.redd.it/w4ult2xaxjue1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;s=41a54fd22aa35db87efefd7fb9d658a50bd85f69",
+                    "width": 1080,
+                    "height": 763
+                  }
+                ],
+                "variants": {},
+                "id": "9ozZGLXgz3lGsj10iIBaWWH7yJI6Yv4ttffh2KG4WcQ"
+              }
+            ],
+            "enabled": true
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1jy1wdc",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Superb_Net_7426",
+          "discussion_type": null,
+          "num_comments": 80,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1jy1wdc/i_made_an_n8n_cheat_sheet/",
+          "stickied": false,
+          "url": "https://i.redd.it/w4ult2xaxjue1.png",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1744527967,
+          "num_crossposts": 1,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "Hey n8n community! I’m curious if anyone here is using n8n to generate income. Whether it’s automating client workflows, building tools, or something else entirely, I’d love to hear how you’re monetizing it! Share your ideas or experiences below.",
+          "author_fullname": "t2_zj853gtgh",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "Anyone Using n8n to Make Money? How Are You Doing It?",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1kx0pbw",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.97,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 200,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": "Discussion",
+          "can_mod_post": false,
+          "score": 200,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1748384503,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;Hey n8n community! I’m curious if anyone here is using n8n to generate income. Whether it’s automating client workflows, building tools, or something else entirely, I’d love to hear how you’re monetizing it! Share your ideas or experiences below.&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "0aa736a6-1bc8-11f0-96d8-ee819510d4fb",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "transparent",
+          "id": "1kx0pbw",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Embarrassed_Steak309",
+          "discussion_type": null,
+          "num_comments": 149,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1kx0pbw/anyone_using_n8n_to_make_money_how_are_you_doing/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1kx0pbw/anyone_using_n8n_to_make_money_how_are_you_doing/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1748384503,
+          "num_crossposts": 2,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "Do your job well. \n\n\\_\\_\\_\n\nI see a lot of people **frustrated** about content in social media that tells them that everyone can make EASY money with N8N and shares their templates and courses - you start to feel like you're missing something when everyone around you is successful.\n\nThese people **are lying** to get their own benefits from AI trends - they make money on content/education, not on real projects. Most of them never **tried** to build something that actually works or acquire real clients.\n\nMost of the templates are just pieces of crap, stolen three times over.\n\nThat’s why people jump into the real world after their courses and can’t make even a penny with the knowledge they’ve acquired.\n\nMany people teach how to sell solutions, not how to build them. As a result, the market is full of crappy agencies with zero-experience people trying to trick clients and make junk that never works.\n\nI spent 5 years among such agencies and saw hundreds of thousands of dollars spent on solutions that never made it to production.\n\n\n\n**So, how do you do real stuff and make money without pushy sales techniques?**\n\nI’ve made $5k per month for the last 3 years in a country where the average salary is $800.\n\nDo I do sales? No. Cold outreach? No.\n\nUpwork? Not anymore, I was banned.\n\nSo, where do I get most of my clients? **Relationships.**\n\nPeople trust people, not ads.\n\n\n\n**How do you build relationships from scratch?**\n\nGet your first projects for free to gain experience and meet new people. Help others in communities, whether you know the answer or not. \n\nContent is a part of building relationships, because through your content people get to know you and feel closer to you as a person. Choose one social media platform and share your knowledge, your cases, and interesting finds from the internet.\n\nYou don’t need a lot - in reality, you just need to do 1-3 projects really well and build relationships with those clients. If you make them money with your solution, they will come back to you over and over again. Half of my clients come back even after years because they know I can provide quality solutions and really help them.\n\nOne good, proactive client can supply you with dozens of projects so you’ll never need to spend time acquiring other clients - this is how many companies work in totally different niches for decades.\n\n**How do you provide good quality?**\n\nWork hard. Spend more time learning new tech and improving your quality rather than selling. Do audits of projects you’ve completed to find bugs. Focus on the long term and ignore the hype.\n\nIf you want to make more money, you can always start transforming your freelance work into a business. Hire additional people and teach them how to do it well. Attract more clients while maintaining high quality.\n\n\n\n**Be honest, be smart, and care about people and your job -** this is the only way to make $5k per month with N8N.",
+          "author_fullname": "t2_mwolz6jo",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "The only way to make $5000 per month with N8N",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1ky8gnh",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.97,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 644,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": "Discussion",
+          "can_mod_post": false,
+          "score": 644,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1748518342,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;Do your job well. &lt;/p&gt;\n\n&lt;p&gt;___&lt;/p&gt;\n\n&lt;p&gt;I see a lot of people &lt;strong&gt;frustrated&lt;/strong&gt; about content in social media that tells them that everyone can make EASY money with N8N and shares their templates and courses - you start to feel like you&amp;#39;re missing something when everyone around you is successful.&lt;/p&gt;\n\n&lt;p&gt;These people &lt;strong&gt;are lying&lt;/strong&gt; to get their own benefits from AI trends - they make money on content/education, not on real projects. Most of them never &lt;strong&gt;tried&lt;/strong&gt; to build something that actually works or acquire real clients.&lt;/p&gt;\n\n&lt;p&gt;Most of the templates are just pieces of crap, stolen three times over.&lt;/p&gt;\n\n&lt;p&gt;That’s why people jump into the real world after their courses and can’t make even a penny with the knowledge they’ve acquired.&lt;/p&gt;\n\n&lt;p&gt;Many people teach how to sell solutions, not how to build them. As a result, the market is full of crappy agencies with zero-experience people trying to trick clients and make junk that never works.&lt;/p&gt;\n\n&lt;p&gt;I spent 5 years among such agencies and saw hundreds of thousands of dollars spent on solutions that never made it to production.&lt;/p&gt;\n\n&lt;p&gt;&lt;strong&gt;So, how do you do real stuff and make money without pushy sales techniques?&lt;/strong&gt;&lt;/p&gt;\n\n&lt;p&gt;I’ve made $5k per month for the last 3 years in a country where the average salary is $800.&lt;/p&gt;\n\n&lt;p&gt;Do I do sales? No. Cold outreach? No.&lt;/p&gt;\n\n&lt;p&gt;Upwork? Not anymore, I was banned.&lt;/p&gt;\n\n&lt;p&gt;So, where do I get most of my clients? &lt;strong&gt;Relationships.&lt;/strong&gt;&lt;/p&gt;\n\n&lt;p&gt;People trust people, not ads.&lt;/p&gt;\n\n&lt;p&gt;&lt;strong&gt;How do you build relationships from scratch?&lt;/strong&gt;&lt;/p&gt;\n\n&lt;p&gt;Get your first projects for free to gain experience and meet new people. Help others in communities, whether you know the answer or not. &lt;/p&gt;\n\n&lt;p&gt;Content is a part of building relationships, because through your content people get to know you and feel closer to you as a person. Choose one social media platform and share your knowledge, your cases, and interesting finds from the internet.&lt;/p&gt;\n\n&lt;p&gt;You don’t need a lot - in reality, you just need to do 1-3 projects really well and build relationships with those clients. If you make them money with your solution, they will come back to you over and over again. Half of my clients come back even after years because they know I can provide quality solutions and really help them.&lt;/p&gt;\n\n&lt;p&gt;One good, proactive client can supply you with dozens of projects so you’ll never need to spend time acquiring other clients - this is how many companies work in totally different niches for decades.&lt;/p&gt;\n\n&lt;p&gt;&lt;strong&gt;How do you provide good quality?&lt;/strong&gt;&lt;/p&gt;\n\n&lt;p&gt;Work hard. Spend more time learning new tech and improving your quality rather than selling. Do audits of projects you’ve completed to find bugs. Focus on the long term and ignore the hype.&lt;/p&gt;\n\n&lt;p&gt;If you want to make more money, you can always start transforming your freelance work into a business. Hire additional people and teach them how to do it well. Attract more clients while maintaining high quality.&lt;/p&gt;\n\n&lt;p&gt;&lt;strong&gt;Be honest, be smart, and care about people and your job -&lt;/strong&gt; this is the only way to make $5k per month with N8N.&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "0aa736a6-1bc8-11f0-96d8-ee819510d4fb",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "transparent",
+          "id": "1ky8gnh",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Aggravating-Put-9464",
+          "discussion_type": null,
+          "num_comments": 78,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1ky8gnh/the_only_way_to_make_5000_per_month_with_n8n/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1ky8gnh/the_only_way_to_make_5000_per_month_with_n8n/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1748518342,
+          "num_crossposts": 1,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "I've noticed that tools like n8n make it incredibly easy to build customized automation workflows. I'm curious if anyone has used n8n to create something that generates income. While I've heard many stories about n8n being used for personal productivity, I'm more interested in examples where it's been the foundation of a real business. Has anyone successfully built a business using n8n or a similar automation tool?",
+          "author_fullname": "t2_5ssnox5e",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "Has anyone made real money using N8N?",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1i1dfbh",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.98,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 54,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 54,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1736880942,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;I&amp;#39;ve noticed that tools like n8n make it incredibly easy to build customized automation workflows. I&amp;#39;m curious if anyone has used n8n to create something that generates income. While I&amp;#39;ve heard many stories about n8n being used for personal productivity, I&amp;#39;m more interested in examples where it&amp;#39;s been the foundation of a real business. Has anyone successfully built a business using n8n or a similar automation tool?&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1i1dfbh",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "ysp4u",
+          "discussion_type": null,
+          "num_comments": 68,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1i1dfbh/has_anyone_made_real_money_using_n8n/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1i1dfbh/has_anyone_made_real_money_using_n8n/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1736880942,
+          "num_crossposts": 0,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "Low key I'm a little nervous about getting a bunch of downvotes on this post too. But I keep hearing about it and people keep swearing about it. Should I aim that direction instead of dealing with like zapier?",
+          "author_fullname": "t2_1an1rwzubw",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "I'm a little nervous about wasting my time in n8n.. but is it worth it? Worth exploring?",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1jm4tc6",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.88,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 36,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 36,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1743193792,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;Low key I&amp;#39;m a little nervous about getting a bunch of downvotes on this post too. But I keep hearing about it and people keep swearing about it. Should I aim that direction instead of dealing with like zapier?&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1jm4tc6",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "AWeb3Dad",
+          "discussion_type": null,
+          "num_comments": 67,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1jm4tc6/im_a_little_nervous_about_wasting_my_time_in_n8n/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1jm4tc6/im_a_little_nervous_about_wasting_my_time_in_n8n/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1743193792,
+          "num_crossposts": 0,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "I’m curious to hear how others are using n8n in their workflows. Have you created something that truly made a difference in your daytoday life of business? ",
+          "author_fullname": "t2_qk2rj325",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "How has n8n changed your life?",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1i148rr",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 1,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 30,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 30,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1736855036,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;I’m curious to hear how others are using n8n in their workflows. Have you created something that truly made a difference in your daytoday life of business? &lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1i148rr",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "MonicaGNajera",
+          "discussion_type": null,
+          "num_comments": 44,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1i148rr/how_has_n8n_changed_your_life/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1i148rr/how_has_n8n_changed_your_life/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1736855036,
+          "num_crossposts": 0,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "",
+          "author_fullname": "t2_ibi0a",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "This is getting out of hand 😂",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": 95,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1j06zp0",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.99,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 457,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": true,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 457,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://b.thumbs.redditmedia.com/CTc0RWavkd7qk1NyCc4szArfiIux_n1qM9JEJwyHycU.jpg",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "image",
+          "content_categories": null,
+          "is_self": false,
+          "mod_note": null,
+          "created": 1740747295,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "i.redd.it",
+          "allow_live_comments": false,
+          "selftext_html": null,
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://i.redd.it/uekuj18cnvle1.png",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://preview.redd.it/uekuj18cnvle1.png?auto=webp&amp;s=9d94b08ecddc18e072b05262e60c628482d86c38",
+                  "width": 1958,
+                  "height": 1342
+                },
+                "resolutions": [
+                  {
+                    "url": "https://preview.redd.it/uekuj18cnvle1.png?width=108&amp;crop=smart&amp;auto=webp&amp;s=fdcf1e01783330e0f5e0e2c51d150ac25f6b92c6",
+                    "width": 108,
+                    "height": 74
+                  },
+                  {
+                    "url": "https://preview.redd.it/uekuj18cnvle1.png?width=216&amp;crop=smart&amp;auto=webp&amp;s=daf2067677d7e527e390dad1af6de905aa9e3798",
+                    "width": 216,
+                    "height": 148
+                  },
+                  {
+                    "url": "https://preview.redd.it/uekuj18cnvle1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=d215eb1b63340948f9c4b9b89eb40ee5e60f5052",
+                    "width": 320,
+                    "height": 219
+                  },
+                  {
+                    "url": "https://preview.redd.it/uekuj18cnvle1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=b5c2bcb0ad9206ca7e66ef64ffc1a06208210ba9",
+                    "width": 640,
+                    "height": 438
+                  },
+                  {
+                    "url": "https://preview.redd.it/uekuj18cnvle1.png?width=960&amp;crop=smart&amp;auto=webp&amp;s=2fef31f29057646225a67985ae4f5ef847ca195b",
+                    "width": 960,
+                    "height": 657
+                  },
+                  {
+                    "url": "https://preview.redd.it/uekuj18cnvle1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;s=e13fc01ffcb2a5db5de9afffcb8d6caa4b4c18c0",
+                    "width": 1080,
+                    "height": 740
+                  }
+                ],
+                "variants": {},
+                "id": "ZRtlo5-VZl4d5BHFZhhoYfCy8-Zm7_y6wdewG42uatM"
+              }
+            ],
+            "enabled": true
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1j06zp0",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Lokki007",
+          "discussion_type": null,
+          "num_comments": 105,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1j06zp0/this_is_getting_out_of_hand/",
+          "stickied": false,
+          "url": "https://i.redd.it/uekuj18cnvle1.png",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1740747295,
+          "num_crossposts": 1,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "",
+          "author_fullname": "t2_a1xtesmc",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "is_gallery": true,
+          "title": "i automated the entire cold outreach process in n8n (sorry to whoever's job i just replaced)",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": 104,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "media_metadata": {
+            "6lzazxrbm2qe1": {
+              "status": "valid",
+              "e": "Image",
+              "m": "image/jpg",
+              "p": [
+                {
+                  "y": 46,
+                  "x": 108,
+                  "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=108&amp;crop=smart&amp;auto=webp&amp;s=7546736506e6e069e6595d14fe391c5fb82eb355"
+                },
+                {
+                  "y": 93,
+                  "x": 216,
+                  "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=216&amp;crop=smart&amp;auto=webp&amp;s=6e3566f24c21c9533846e80cc04ca27524ae0944"
+                },
+                {
+                  "y": 138,
+                  "x": 320,
+                  "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=320&amp;crop=smart&amp;auto=webp&amp;s=392a2e250ec20feda7d31233029671743bbc02aa"
+                },
+                {
+                  "y": 276,
+                  "x": 640,
+                  "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=8f86f9da5d3d07f49f026ba8f073ce126c9e0fe5"
+                },
+                {
+                  "y": 414,
+                  "x": 960,
+                  "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=960&amp;crop=smart&amp;auto=webp&amp;s=d59fe8f928d53b06504e8f6032f0e841067b72e0"
+                },
+                {
+                  "y": 465,
+                  "x": 1080,
+                  "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=1080&amp;crop=smart&amp;auto=webp&amp;s=a4f06f7cc9807e81ce58bbc59113829f37fb103e"
+                }
+              ],
+              "s": {
+                "y": 552,
+                "x": 1280,
+                "u": "https://preview.redd.it/6lzazxrbm2qe1.jpg?width=1280&amp;format=pjpg&amp;auto=webp&amp;s=78ad62b8683bc004c6b57e7aba74c6559b6e6139"
+              },
+              "id": "6lzazxrbm2qe1"
+            },
+            "ebuoh3sbm2qe1": {
+              "status": "valid",
+              "e": "Image",
+              "m": "image/jpg",
+              "p": [
+                {
+                  "y": 76,
+                  "x": 108,
+                  "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=108&amp;crop=smart&amp;auto=webp&amp;s=4696436ac9b03b4fed913fbbae5632487b260af4"
+                },
+                {
+                  "y": 153,
+                  "x": 216,
+                  "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=216&amp;crop=smart&amp;auto=webp&amp;s=556befe6920116368fbe034b9a48d5a30055360e"
+                },
+                {
+                  "y": 227,
+                  "x": 320,
+                  "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=320&amp;crop=smart&amp;auto=webp&amp;s=572d2d6df45370ffe486a6cfe436d149f1abf997"
+                },
+                {
+                  "y": 455,
+                  "x": 640,
+                  "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=55c7a07caa0e6e0483746ed8587c31e351da29ce"
+                },
+                {
+                  "y": 683,
+                  "x": 960,
+                  "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=960&amp;crop=smart&amp;auto=webp&amp;s=762d70d5eb17c5882ac75b836cd75c5900bb9037"
+                },
+                {
+                  "y": 768,
+                  "x": 1080,
+                  "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=1080&amp;crop=smart&amp;auto=webp&amp;s=914164c160e045320271dcf8d8d5adbbc7b4b956"
+                }
+              ],
+              "s": {
+                "y": 773,
+                "x": 1086,
+                "u": "https://preview.redd.it/ebuoh3sbm2qe1.jpg?width=1086&amp;format=pjpg&amp;auto=webp&amp;s=82f4e2741e89751946de535658e8dc4e9c7f3860"
+              },
+              "id": "ebuoh3sbm2qe1"
+            },
+            "ic9nzwrbm2qe1": {
+              "status": "valid",
+              "e": "Image",
+              "m": "image/jpg",
+              "p": [
+                {
+                  "y": 55,
+                  "x": 108,
+                  "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=108&amp;crop=smart&amp;auto=webp&amp;s=55ab83e02f9009f65532346723b35fc57d20ee6d"
+                },
+                {
+                  "y": 110,
+                  "x": 216,
+                  "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=216&amp;crop=smart&amp;auto=webp&amp;s=ee9ad24f455376b2484b8ef428f385780e4ddb19"
+                },
+                {
+                  "y": 164,
+                  "x": 320,
+                  "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=320&amp;crop=smart&amp;auto=webp&amp;s=d703b150dc83f597b6913fb85ce806f083690a4f"
+                },
+                {
+                  "y": 328,
+                  "x": 640,
+                  "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=58d588fe1c0a6238dec30b519cfa25be6cd81332"
+                },
+                {
+                  "y": 491,
+                  "x": 960,
+                  "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=960&amp;crop=smart&amp;auto=webp&amp;s=af631d88a1be1a34628f67ebd4be51adf96463d8"
+                },
+                {
+                  "y": 553,
+                  "x": 1080,
+                  "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=1080&amp;crop=smart&amp;auto=webp&amp;s=afcaa7fb209669f2b239d7f705ac5c2f8855aa08"
+                }
+              ],
+              "s": {
+                "y": 656,
+                "x": 1280,
+                "u": "https://preview.redd.it/ic9nzwrbm2qe1.jpg?width=1280&amp;format=pjpg&amp;auto=webp&amp;s=4bd3a326e3dbe5c791c9961d4d8dca31b92d0b34"
+              },
+              "id": "ic9nzwrbm2qe1"
+            },
+            "6c2nf6sbm2qe1": {
+              "status": "valid",
+              "e": "Image",
+              "m": "image/jpg",
+              "p": [
+                {
+                  "y": 80,
+                  "x": 108,
+                  "u": "https://preview.redd.it/6c2nf6sbm2qe1.jpg?width=108&amp;crop=smart&amp;auto=webp&amp;s=543b712b97efeb1923829fd9bc55e900e25a65fe"
+                },
+                {
+                  "y": 161,
+                  "x": 216,
+                  "u": "https://preview.redd.it/6c2nf6sbm2qe1.jpg?width=216&amp;crop=smart&amp;auto=webp&amp;s=5edfcaf327ecca23826c7e7e39eadc5f6e03b87f"
+                },
+                {
+                  "y": 239,
+                  "x": 320,
+                  "u": "https://preview.redd.it/6c2nf6sbm2qe1.jpg?width=320&amp;crop=smart&amp;auto=webp&amp;s=3499eac39ab8f01bf8139de446af349fff80d314"
+                },
+                {
+                  "y": 479,
+                  "x": 640,
+                  "u": "https://preview.redd.it/6c2nf6sbm2qe1.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=b3a74a7a67454526ec559d2a3f6dcfd7532c7788"
+                },
+                {
+                  "y": 719,
+                  "x": 960,
+                  "u": "https://preview.redd.it/6c2nf6sbm2qe1.jpg?width=960&amp;crop=smart&amp;auto=webp&amp;s=1c80eded499a6090d290f6521a5a9e38f499de59"
+                }
+              ],
+              "s": {
+                "y": 766,
+                "x": 1022,
+                "u": "https://preview.redd.it/6c2nf6sbm2qe1.jpg?width=1022&amp;format=pjpg&amp;auto=webp&amp;s=507dd2b3f2f6c5e75c3d2ef923e9c7af5326446a"
+              },
+              "id": "6c2nf6sbm2qe1"
+            }
+          },
+          "name": "t3_1jgl5ek",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.98,
+          "author_flair_background_color": null,
+          "ups": 946,
+          "domain": "reddit.com",
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "gallery_data": {
+            "items": [
+              {
+                "media_id": "6c2nf6sbm2qe1",
+                "id": 627459170
+              },
+              {
+                "media_id": "ebuoh3sbm2qe1",
+                "id": 627459171
+              },
+              {
+                "media_id": "6lzazxrbm2qe1",
+                "id": 627459172
+              },
+              {
+                "media_id": "ic9nzwrbm2qe1",
+                "id": 627459173
+              }
+            ]
+          },
+          "link_flair_text": "Template",
+          "can_mod_post": false,
+          "score": 946,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://b.thumbs.redditmedia.com/aiUJhGriU00SdTVQBG3xwunPYc6sMOONpROGa5B2CJQ.jpg",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": false,
+          "subreddit_type": "public",
+          "created": 1742575067,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "total_awards_received": 0,
+          "allow_live_comments": false,
+          "selftext_html": null,
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://www.reddit.com/gallery/1jgl5ek",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "e0fb2308-ff57-11ef-a744-6ec8bb014b73",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "mod_note": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "num_reports": null,
+          "removal_reason": null,
+          "link_flair_background_color": "transparent",
+          "id": "1jgl5ek",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Lightwheel",
+          "discussion_type": null,
+          "num_comments": 371,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1jgl5ek/i_automated_the_entire_cold_outreach_process_in/",
+          "stickied": false,
+          "url": "https://www.reddit.com/gallery/1jgl5ek",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1742575067,
+          "num_crossposts": 2,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "I've been obsessed with combining AI and financial markets. After days of testing, I've built something I'm excited to share: an automated AI system that simultaneously generates real-time gold market predictions by analysing technical indicators and news sentiment.\n\nThe best part? It's built entirely with open-source tools and APIS anyone can access.\n\nWhy Gold Trading? Gold trading is notoriously complex - you need to analyse multiple timeframes, keep up with global news, and interpret technical patterns all at once. Most traders either:\n\n* Miss crucial market moves while sleeping\n* Get overwhelmed by conflicting indicators\n* Make emotional decisions based on incomplete data\n* Struggle to process news impact in real-time\n\nThe Solution: Automated AI Analysis. I built a system that handles all of this automatically using:\n\n* n8n for workflow automation\n* TwelveData API for technical analysis\n* GNews API for real-time news\n* Google Gemini for sentiment analysis\n* Telegram for instant notifications\n\nHere's exactly how it works:\n\n1. Data Collection Layer\n\n* Pulls candlestick data across 5 timeframes (5m to 1d)\n* Fetches the latest gold-related news articles\n* Structures everything into a unified format\n\n1. Analysis Layer\n\n* Processes technical patterns across timeframes\n* Analyses news sentiment (both short and long-term impact)\n* Combines both signals into a weighted prediction\n\n1. Output Layer\n\n* Generates detailed market reports\n* Provides clear buy/sell recommendations\n* Delivers everything via Telegram\n\nThe Results:\n\nAfter running this system for the past month:\n\n* Prediction Accuracy: 92% on major trend movements\n* Average Response Time: &lt; 30 seconds from trigger\n* False Positive Rate: &lt; 5% on buy/sell signals\n* Time Saved: \\~4 hours daily vs manual analysis\n\nReal Example Output: Here is a real-time example of today's price\n\nGOLD MARKET SNAPSHOT Current Price: $3,222.18Trend: Bearish (4H timeframe)Sentiment: Weakening Momentum\n\nTechnical Signals:\n\n* 5m: Downtrend\n* 30m: Attempting support\n* ⚠ 1h: Resistance near $3,240\n* 4h: Death Cross nearing\n* 1d: Below 200 MA\n\nNews Sentiment:\n\n* 📉 Short-term: -0.67 (Bearish)\n* 📉 Long-term: -0.35 (Slightly Bearish)\n\n📈 RECOMMENDATION: Hold / Watch Closely Short-term Target: $3,250Support: $3,200Stop-Loss (for Longs): $3,190\n\nWant to build something similar? Here's the complete n8n workflow image",
+          "author_fullname": "t2_1luj7s4fsa",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "I Built an AI That Predicts Gold Market Trends with 90%+ Accuracy Using n8n, Gemini, and Real-Time Data",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": 79,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1kkyco0",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.91,
+          "author_flair_background_color": null,
+          "ups": 773,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": true,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": "Discussion",
+          "can_mod_post": false,
+          "score": 773,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://external-preview.redd.it/aptftVmVrkbuTNp-2AbcuhOehjfkAz31UEdqM7GmpDU.png?width=140&amp;height=79&amp;crop=140:79,smart&amp;auto=webp&amp;s=a40d839aa1039469eca52854d212c1b7732aa4eb",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "image",
+          "content_categories": null,
+          "is_self": false,
+          "subreddit_type": "public",
+          "created": 1747070661,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "i.redd.it",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;I&amp;#39;ve been obsessed with combining AI and financial markets. After days of testing, I&amp;#39;ve built something I&amp;#39;m excited to share: an automated AI system that simultaneously generates real-time gold market predictions by analysing technical indicators and news sentiment.&lt;/p&gt;\n\n&lt;p&gt;The best part? It&amp;#39;s built entirely with open-source tools and APIS anyone can access.&lt;/p&gt;\n\n&lt;p&gt;Why Gold Trading? Gold trading is notoriously complex - you need to analyse multiple timeframes, keep up with global news, and interpret technical patterns all at once. Most traders either:&lt;/p&gt;\n\n&lt;ul&gt;\n&lt;li&gt;Miss crucial market moves while sleeping&lt;/li&gt;\n&lt;li&gt;Get overwhelmed by conflicting indicators&lt;/li&gt;\n&lt;li&gt;Make emotional decisions based on incomplete data&lt;/li&gt;\n&lt;li&gt;Struggle to process news impact in real-time&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;The Solution: Automated AI Analysis. I built a system that handles all of this automatically using:&lt;/p&gt;\n\n&lt;ul&gt;\n&lt;li&gt;n8n for workflow automation&lt;/li&gt;\n&lt;li&gt;TwelveData API for technical analysis&lt;/li&gt;\n&lt;li&gt;GNews API for real-time news&lt;/li&gt;\n&lt;li&gt;Google Gemini for sentiment analysis&lt;/li&gt;\n&lt;li&gt;Telegram for instant notifications&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;Here&amp;#39;s exactly how it works:&lt;/p&gt;\n\n&lt;ol&gt;\n&lt;li&gt;Data Collection Layer&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;ul&gt;\n&lt;li&gt;Pulls candlestick data across 5 timeframes (5m to 1d)&lt;/li&gt;\n&lt;li&gt;Fetches the latest gold-related news articles&lt;/li&gt;\n&lt;li&gt;Structures everything into a unified format&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;ol&gt;\n&lt;li&gt;Analysis Layer&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;ul&gt;\n&lt;li&gt;Processes technical patterns across timeframes&lt;/li&gt;\n&lt;li&gt;Analyses news sentiment (both short and long-term impact)&lt;/li&gt;\n&lt;li&gt;Combines both signals into a weighted prediction&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;ol&gt;\n&lt;li&gt;Output Layer&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;ul&gt;\n&lt;li&gt;Generates detailed market reports&lt;/li&gt;\n&lt;li&gt;Provides clear buy/sell recommendations&lt;/li&gt;\n&lt;li&gt;Delivers everything via Telegram&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;The Results:&lt;/p&gt;\n\n&lt;p&gt;After running this system for the past month:&lt;/p&gt;\n\n&lt;ul&gt;\n&lt;li&gt;Prediction Accuracy: 92% on major trend movements&lt;/li&gt;\n&lt;li&gt;Average Response Time: &amp;lt; 30 seconds from trigger&lt;/li&gt;\n&lt;li&gt;False Positive Rate: &amp;lt; 5% on buy/sell signals&lt;/li&gt;\n&lt;li&gt;Time Saved: ~4 hours daily vs manual analysis&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;Real Example Output: Here is a real-time example of today&amp;#39;s price&lt;/p&gt;\n\n&lt;p&gt;GOLD MARKET SNAPSHOT Current Price: $3,222.18Trend: Bearish (4H timeframe)Sentiment: Weakening Momentum&lt;/p&gt;\n\n&lt;p&gt;Technical Signals:&lt;/p&gt;\n\n&lt;ul&gt;\n&lt;li&gt;5m: Downtrend&lt;/li&gt;\n&lt;li&gt;30m: Attempting support&lt;/li&gt;\n&lt;li&gt;⚠ 1h: Resistance near $3,240&lt;/li&gt;\n&lt;li&gt;4h: Death Cross nearing&lt;/li&gt;\n&lt;li&gt;1d: Below 200 MA&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;News Sentiment:&lt;/p&gt;\n\n&lt;ul&gt;\n&lt;li&gt;📉 Short-term: -0.67 (Bearish)&lt;/li&gt;\n&lt;li&gt;📉 Long-term: -0.35 (Slightly Bearish)&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;📈 RECOMMENDATION: Hold / Watch Closely Short-term Target: $3,250Support: $3,200Stop-Loss (for Longs): $3,190&lt;/p&gt;\n\n&lt;p&gt;Want to build something similar? Here&amp;#39;s the complete n8n workflow image&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://i.redd.it/4d7h7bnlxd0f1.png",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?auto=webp&amp;s=ed86949204c1091f04f9b45c30a42576ca7c63a6",
+                  "width": 2922,
+                  "height": 1662
+                },
+                "resolutions": [
+                  {
+                    "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?width=108&amp;crop=smart&amp;auto=webp&amp;s=65cec147c19e054c661e2eb475ae1b08f03202ba",
+                    "width": 108,
+                    "height": 61
+                  },
+                  {
+                    "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?width=216&amp;crop=smart&amp;auto=webp&amp;s=58a184df41c4ec03c26338e90930bbd108e80ac7",
+                    "width": 216,
+                    "height": 122
+                  },
+                  {
+                    "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=b8f9adb762d132dc8f99a8262e1328d87ce6d5bb",
+                    "width": 320,
+                    "height": 182
+                  },
+                  {
+                    "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=2880c01e2ea09ec189ca072b0120a23cf773eb0b",
+                    "width": 640,
+                    "height": 364
+                  },
+                  {
+                    "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?width=960&amp;crop=smart&amp;auto=webp&amp;s=dc2054b68e429582cd5756b8e8dcc3843b7bf2e3",
+                    "width": 960,
+                    "height": 546
+                  },
+                  {
+                    "url": "https://preview.redd.it/4d7h7bnlxd0f1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;s=93d95dcd2961017f174467f9971f62be26a366be",
+                    "width": 1080,
+                    "height": 614
+                  }
+                ],
+                "variants": {},
+                "id": "aptftVmVrkbuTNp-2AbcuhOehjfkAz31UEdqM7GmpDU"
+              }
+            ],
+            "enabled": true
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "0aa736a6-1bc8-11f0-96d8-ee819510d4fb",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "mod_note": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "num_reports": null,
+          "removal_reason": null,
+          "link_flair_background_color": "transparent",
+          "id": "1kkyco0",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Smart-Echo6402",
+          "discussion_type": null,
+          "num_comments": 165,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1kkyco0/i_built_an_ai_that_predicts_gold_market_trends/",
+          "stickied": false,
+          "url": "https://i.redd.it/4d7h7bnlxd0f1.png",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1747070661,
+          "num_crossposts": 1,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "Hey everyone, Humza here. \n\nI am an n8n developer myself, so first of all, you won't have to deal with a non-technical manager giving unrealistic deadlines and expectations.\n\nHiring for [Automization.io](http://Automization.io)\n\n**Job description:**  \nWe are looking to form a team of professional developers (including beginners) to assign projects to based on their skillsets. Perfect for both experienced devs and devs that have been working on workflows but haven't made it an income stream yet. Work in your own time and based on your own rates with full freedom to accept or reject any projects presented to you.\n\n**Payment terms:**\n\n*  A simple fixed commission based rate of 30% per project. (Current projects range from $100 - $5000 with a few above the $5000 mark). \n* You have full freedom to accept or reject any projects that are presented to you.  \n* Payment will be sent in milestones depending on the arrangement - Example: If the first milestone \"deposit\" is agreed upon, you will receive 30% from the deposit before the project, when the second milestone is met and second payment is received you will receive 30% again, etc.\n\n**You will receive the following information for each project:**  \n1. Project scope:  \nDetailed breakdown of what the project consists of including the skillsets required and the tools that will be utilised.\n\n2. Deliverables:  \nWhat the \"finish line\" of the project is. This makes the final output of the project clear.\n\n3. Deadline:  \nA realistic deadline, based on the complexity and scope of the project.\n\n  \n**Why is your website incomplete?**  \nWith most of our clients coming through Reddit, LinkedIn or Upwork. The website is more of a placeholder than an acquisition funnel at the moment. We are planning on completing the website in the near future but it isn't a priority just yet.\n\nFeel contact via DM if you are interested, thank you!\n\n",
+          "author_fullname": "t2_iekl4g024",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "Looking for n8n developers to work on a per project commission basis",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1kuddci",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.93,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 133,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": "Now Hiring",
+          "can_mod_post": false,
+          "score": 133,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1748098162,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;Hey everyone, Humza here. &lt;/p&gt;\n\n&lt;p&gt;I am an n8n developer myself, so first of all, you won&amp;#39;t have to deal with a non-technical manager giving unrealistic deadlines and expectations.&lt;/p&gt;\n\n&lt;p&gt;Hiring for &lt;a href=\"http://Automization.io\"&gt;Automization.io&lt;/a&gt;&lt;/p&gt;\n\n&lt;p&gt;&lt;strong&gt;Job description:&lt;/strong&gt;&lt;br/&gt;\nWe are looking to form a team of professional developers (including beginners) to assign projects to based on their skillsets. Perfect for both experienced devs and devs that have been working on workflows but haven&amp;#39;t made it an income stream yet. Work in your own time and based on your own rates with full freedom to accept or reject any projects presented to you.&lt;/p&gt;\n\n&lt;p&gt;&lt;strong&gt;Payment terms:&lt;/strong&gt;&lt;/p&gt;\n\n&lt;ul&gt;\n&lt;li&gt; A simple fixed commission based rate of 30% per project. (Current projects range from $100 - $5000 with a few above the $5000 mark). &lt;/li&gt;\n&lt;li&gt;You have full freedom to accept or reject any projects that are presented to you.&lt;br/&gt;&lt;/li&gt;\n&lt;li&gt;Payment will be sent in milestones depending on the arrangement - Example: If the first milestone &amp;quot;deposit&amp;quot; is agreed upon, you will receive 30% from the deposit before the project, when the second milestone is met and second payment is received you will receive 30% again, etc.&lt;/li&gt;\n&lt;/ul&gt;\n\n&lt;p&gt;&lt;strong&gt;You will receive the following information for each project:&lt;/strong&gt;&lt;br/&gt;\n1. Project scope:&lt;br/&gt;\nDetailed breakdown of what the project consists of including the skillsets required and the tools that will be utilised.&lt;/p&gt;\n\n&lt;ol&gt;\n&lt;li&gt;&lt;p&gt;Deliverables:&lt;br/&gt;\nWhat the &amp;quot;finish line&amp;quot; of the project is. This makes the final output of the project clear.&lt;/p&gt;&lt;/li&gt;\n&lt;li&gt;&lt;p&gt;Deadline:&lt;br/&gt;\nA realistic deadline, based on the complexity and scope of the project.&lt;/p&gt;&lt;/li&gt;\n&lt;/ol&gt;\n\n&lt;p&gt;&lt;strong&gt;Why is your website incomplete?&lt;/strong&gt;&lt;br/&gt;\nWith most of our clients coming through Reddit, LinkedIn or Upwork. The website is more of a placeholder than an acquisition funnel at the moment. We are planning on completing the website in the near future but it isn&amp;#39;t a priority just yet.&lt;/p&gt;\n\n&lt;p&gt;Feel contact via DM if you are interested, thank you!&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "bb0ac470-1b2a-11f0-8fbb-6e16c1d62484",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "#ecfc03",
+          "id": "1kuddci",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "HumzaShake",
+          "discussion_type": null,
+          "num_comments": 455,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1kuddci/looking_for_n8n_developers_to_work_on_a_per/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1kuddci/looking_for_n8n_developers_to_work_on_a_per/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1748098162,
+          "num_crossposts": 1,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "",
+          "author_fullname": "t2_2q0opj6h",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "I built a free browser extension that builds your n8n workflows for you, and it’s out now! (Chrome and Firefox)",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": 86,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1jzpj2u",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.98,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 602,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": {
+            "reddit_video": {
+              "bitrate_kbps": 5000,
+              "fallback_url": "https://v.redd.it/o6ld2xmhizue1/DASH_1080.mp4?source=fallback",
+              "has_audio": false,
+              "height": 1080,
+              "width": 1744,
+              "scrubber_media_url": "https://v.redd.it/o6ld2xmhizue1/DASH_96.mp4",
+              "dash_url": "https://v.redd.it/o6ld2xmhizue1/DASHPlaylist.mpd?a=1751619517%2CODFjNTVjOTE1MTIxYjQ2YWFmYzM0NmUzYmZmNTc2NDU3ZDcyZmQ3MjkxMjdlM2EwZDI0ODQ3NjU3MmYxN2RhYg%3D%3D&amp;v=1&amp;f=sd",
+              "duration": 67,
+              "hls_url": "https://v.redd.it/o6ld2xmhizue1/HLSPlaylist.m3u8?a=1751619517%2CNzZmMGY1MGQ5Zjc3MzNkZGFmYTc2NGIxYjk2ODkyZDlmNmY1NzgxNWZiNDNmZTk3MjQ2MjI0MmE3OTg5ZWE5Yg%3D%3D&amp;v=1&amp;f=sd",
+              "is_gif": false,
+              "transcoding_status": "completed"
+            }
+          },
+          "is_reddit_media_domain": true,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 602,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=140&amp;height=86&amp;crop=140:86,smart&amp;format=jpg&amp;v=enabled&amp;lthumb=true&amp;s=61800c4cf7ba8bd4956faf13f0700df488f8c2e0",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "hosted:video",
+          "content_categories": null,
+          "is_self": false,
+          "mod_note": null,
+          "created": 1744716693,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "v.redd.it",
+          "allow_live_comments": false,
+          "selftext_html": null,
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://v.redd.it/o6ld2xmhizue1",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?format=pjpg&amp;auto=webp&amp;s=273a65a2498c4ba472262c2ededfb3991a21e4d8",
+                  "width": 1744,
+                  "height": 1080
+                },
+                "resolutions": [
+                  {
+                    "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=108&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=7fe6a28ac335d7cd6cfff28c7e91e8e848f71bb3",
+                    "width": 108,
+                    "height": 66
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=216&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=1f80ff059876bbbed6465e0a045f8c5cac637fd4",
+                    "width": 216,
+                    "height": 133
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=320&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=233fc329f2b6d612c57ff58700ca3a1e061f27bd",
+                    "width": 320,
+                    "height": 198
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=640&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=987ea52d738d7ab0aa9b815b201f680f12e9b337",
+                    "width": 640,
+                    "height": 396
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=960&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=76ba6bc32ec9bc1ee33d5fe749af8723565c59df",
+                    "width": 960,
+                    "height": 594
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK.png?width=1080&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=60431535c16b11d313d97e62eeefc9c6269aaae1",
+                    "width": 1080,
+                    "height": 668
+                  }
+                ],
+                "variants": {},
+                "id": "YXR6YjB1aWhpenVlMcjANXIaBCuLFXt9yBTkob3OfbNB3z8tGmAFZ_qlBdRK"
+              }
+            ],
+            "enabled": false
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1jzpj2u",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "ArtemisXV",
+          "discussion_type": null,
+          "num_comments": 121,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1jzpj2u/i_built_a_free_browser_extension_that_builds_your/",
+          "stickied": false,
+          "url": "https://v.redd.it/o6ld2xmhizue1",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1744716693,
+          "num_crossposts": 0,
+          "media": {
+            "reddit_video": {
+              "bitrate_kbps": 5000,
+              "fallback_url": "https://v.redd.it/o6ld2xmhizue1/DASH_1080.mp4?source=fallback",
+              "has_audio": false,
+              "height": 1080,
+              "width": 1744,
+              "scrubber_media_url": "https://v.redd.it/o6ld2xmhizue1/DASH_96.mp4",
+              "dash_url": "https://v.redd.it/o6ld2xmhizue1/DASHPlaylist.mpd?a=1751619517%2CODFjNTVjOTE1MTIxYjQ2YWFmYzM0NmUzYmZmNTc2NDU3ZDcyZmQ3MjkxMjdlM2EwZDI0ODQ3NjU3MmYxN2RhYg%3D%3D&amp;v=1&amp;f=sd",
+              "duration": 67,
+              "hls_url": "https://v.redd.it/o6ld2xmhizue1/HLSPlaylist.m3u8?a=1751619517%2CNzZmMGY1MGQ5Zjc3MzNkZGFmYTc2NGIxYjk2ODkyZDlmNmY1NzgxNWZiNDNmZTk3MjQ2MjI0MmE3OTg5ZWE5Yg%3D%3D&amp;v=1&amp;f=sd",
+              "is_gif": false,
+              "transcoding_status": "completed"
+            }
+          },
+          "is_video": true
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "",
+          "author_fullname": "t2_2q0opj6h",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "I built a free browser extension that creates your n8n workflows for you! It's almost ready",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": 86,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1jbvt0a",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.98,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 554,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": {
+            "reddit_video": {
+              "bitrate_kbps": 5000,
+              "fallback_url": "https://v.redd.it/r0klb5ha1voe1/DASH_1080.mp4?source=fallback",
+              "has_audio": false,
+              "height": 1080,
+              "width": 1746,
+              "scrubber_media_url": "https://v.redd.it/r0klb5ha1voe1/DASH_96.mp4",
+              "dash_url": "https://v.redd.it/r0klb5ha1voe1/DASHPlaylist.mpd?a=1751619517%2COGUwNmI4NDEzZDhlNDFhZjA2ZGRhOWE1N2MwZTI2NWU4NDQ0Y2RjZDQ4NGIwYWFiMWNiMTY4ZmU1OTJhZWY3OA%3D%3D&amp;v=1&amp;f=sd",
+              "duration": 29,
+              "hls_url": "https://v.redd.it/r0klb5ha1voe1/HLSPlaylist.m3u8?a=1751619517%2COWUwZTY2N2FmMjA1OTY0NTA5OGUxNDc1MGFmY2M2ZGMzNjcyOWUyMTczNmE0MzkwODQ2NDYxNjEyZGM5OGQ4NQ%3D%3D&amp;v=1&amp;f=sd",
+              "is_gif": false,
+              "transcoding_status": "completed"
+            }
+          },
+          "is_reddit_media_domain": true,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 554,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=140&amp;height=86&amp;crop=140:86,smart&amp;format=jpg&amp;v=enabled&amp;lthumb=true&amp;s=cdf71db8d52f1199778a88a3f356ba0f839555bd",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "hosted:video",
+          "content_categories": null,
+          "is_self": false,
+          "mod_note": null,
+          "created": 1742047444,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "v.redd.it",
+          "allow_live_comments": false,
+          "selftext_html": null,
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://v.redd.it/r0klb5ha1voe1",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?format=pjpg&amp;auto=webp&amp;s=ef3b2682ddbbb6e57dd8f566a4bc9680b0be8f13",
+                  "width": 2708,
+                  "height": 1676
+                },
+                "resolutions": [
+                  {
+                    "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=108&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=8f4fdc52922f69c8e53bcb05d728665380ec52bc",
+                    "width": 108,
+                    "height": 66
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=216&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=8e181e6bc179f37fb5eb58e870836346ca8c22e8",
+                    "width": 216,
+                    "height": 133
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=320&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=724a855d5aa2df5cd180d5eb2d6b27b253a0209f",
+                    "width": 320,
+                    "height": 198
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=640&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=b0190b4bd41862f94b38bb2aec13c5aa1dc9434b",
+                    "width": 640,
+                    "height": 396
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=960&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=63f1f5619c48663d2b4fc1dae085827a15c332ac",
+                    "width": 960,
+                    "height": 594
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO.png?width=1080&amp;crop=smart&amp;format=pjpg&amp;auto=webp&amp;s=333e024ba739b91cc1cd2ea315fbb5b3d81b7465",
+                    "width": 1080,
+                    "height": 668
+                  }
+                ],
+                "variants": {},
+                "id": "eWI4c2ZmZ2Exdm9lMWrR1cnvauhtyjnNmDlN007_M-WJFxSZLpk-QObt6DkO"
+              }
+            ],
+            "enabled": false
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1jbvt0a",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "ArtemisXV",
+          "discussion_type": null,
+          "num_comments": 115,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1jbvt0a/i_built_a_free_browser_extension_that_creates/",
+          "stickied": false,
+          "url": "https://v.redd.it/r0klb5ha1voe1",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1742047444,
+          "num_crossposts": 0,
+          "media": {
+            "reddit_video": {
+              "bitrate_kbps": 5000,
+              "fallback_url": "https://v.redd.it/r0klb5ha1voe1/DASH_1080.mp4?source=fallback",
+              "has_audio": false,
+              "height": 1080,
+              "width": 1746,
+              "scrubber_media_url": "https://v.redd.it/r0klb5ha1voe1/DASH_96.mp4",
+              "dash_url": "https://v.redd.it/r0klb5ha1voe1/DASHPlaylist.mpd?a=1751619517%2COGUwNmI4NDEzZDhlNDFhZjA2ZGRhOWE1N2MwZTI2NWU4NDQ0Y2RjZDQ4NGIwYWFiMWNiMTY4ZmU1OTJhZWY3OA%3D%3D&amp;v=1&amp;f=sd",
+              "duration": 29,
+              "hls_url": "https://v.redd.it/r0klb5ha1voe1/HLSPlaylist.m3u8?a=1751619517%2COWUwZTY2N2FmMjA1OTY0NTA5OGUxNDc1MGFmY2M2ZGMzNjcyOWUyMTczNmE0MzkwODQ2NDYxNjEyZGM5OGQ4NQ%3D%3D&amp;v=1&amp;f=sd",
+              "is_gif": false,
+              "transcoding_status": "completed"
+            }
+          },
+          "is_video": true
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "I run a small real estate agency and I’m the company nerd or at least I’m the only one who can touch technology without making damage.\n3 months ago I stumbled across N8N, don’t even remember how..\nAnyways since then our productivity grew so much and we process leads so much faster now.\nPlus I have been building all sorts of agents for my team (I keep the agents simple and to serve a specific purpose), database automation, contract writers, background investigations, and more..I also wrote a decent knowledge base and I have clients chatting with it and work with the agents until they’re qualified or ask for human contact. It basically reduced workload by 80% for the sales department.\n\nI can really automate anything, this software is amazing.\n\nJust today I setup an agent that reach out to users on my website who leave their email to download an investing guide and the agent knows what the user have been reading, find something in his knowledge that adds value to the user and then craft an email designed to spark conversation with the lead.\nI really look forward to see if this gimmick alone increases conversion.\n\nAnd nothing.. I’m just a happy business owner wondering if even my job will be taken over by ai agents at some point.\nNice but scary, but mostly nice.\n\nKeep building.\nLove this community.\n\n\n",
+          "author_fullname": "t2_7426mtcw",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "N8N the best tool for small business",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": null,
+          "downs": 0,
+          "thumbnail_height": 105,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1jwspka",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.99,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 760,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": 140,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": true,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": null,
+          "can_mod_post": false,
+          "score": 760,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "https://b.thumbs.redditmedia.com/HLMLtkgnNcAPtZUVciMui5Y4_IWNqdSNl5XYg1qpvpA.jpg",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "image",
+          "content_categories": null,
+          "is_self": false,
+          "mod_note": null,
+          "created": 1744385513,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "i.redd.it",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;I run a small real estate agency and I’m the company nerd or at least I’m the only one who can touch technology without making damage.\n3 months ago I stumbled across N8N, don’t even remember how..\nAnyways since then our productivity grew so much and we process leads so much faster now.\nPlus I have been building all sorts of agents for my team (I keep the agents simple and to serve a specific purpose), database automation, contract writers, background investigations, and more..I also wrote a decent knowledge base and I have clients chatting with it and work with the agents until they’re qualified or ask for human contact. It basically reduced workload by 80% for the sales department.&lt;/p&gt;\n\n&lt;p&gt;I can really automate anything, this software is amazing.&lt;/p&gt;\n\n&lt;p&gt;Just today I setup an agent that reach out to users on my website who leave their email to download an investing guide and the agent knows what the user have been reading, find something in his knowledge that adds value to the user and then craft an email designed to spark conversation with the lead.\nI really look forward to see if this gimmick alone increases conversion.&lt;/p&gt;\n\n&lt;p&gt;And nothing.. I’m just a happy business owner wondering if even my job will be taken over by ai agents at some point.\nNice but scary, but mostly nice.&lt;/p&gt;\n\n&lt;p&gt;Keep building.\nLove this community.&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "url_overridden_by_dest": "https://i.redd.it/h3jf3alo58ue1.jpeg",
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?auto=webp&amp;s=293c78eb55f9d467b19253e9de686411307e20e4",
+                  "width": 4032,
+                  "height": 3024
+                },
+                "resolutions": [
+                  {
+                    "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?width=108&amp;crop=smart&amp;auto=webp&amp;s=9b64c09f9ee9f35ffaa65275e0b5f2cf626b69ff",
+                    "width": 108,
+                    "height": 81
+                  },
+                  {
+                    "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?width=216&amp;crop=smart&amp;auto=webp&amp;s=1b2f13538710dee656973a13ce31bf15e46d4ce9",
+                    "width": 216,
+                    "height": 162
+                  },
+                  {
+                    "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?width=320&amp;crop=smart&amp;auto=webp&amp;s=81f456d6317dac636aaf316d5bad71fdc43f665e",
+                    "width": 320,
+                    "height": 240
+                  },
+                  {
+                    "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?width=640&amp;crop=smart&amp;auto=webp&amp;s=e5a5a427895db96c0c92d67550f03d033a1fc1c1",
+                    "width": 640,
+                    "height": 480
+                  },
+                  {
+                    "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?width=960&amp;crop=smart&amp;auto=webp&amp;s=5729189377c990d480902f75749a4a126f5f69b4",
+                    "width": 960,
+                    "height": 720
+                  },
+                  {
+                    "url": "https://preview.redd.it/h3jf3alo58ue1.jpeg?width=1080&amp;crop=smart&amp;auto=webp&amp;s=01552216a407fc0aeeec93b14546f9d73fce1fe8",
+                    "width": 1080,
+                    "height": 810
+                  }
+                ],
+                "variants": {},
+                "id": "tBAKM61HlTHRddYhiloahBXeGrlhFcchBAOiUUz3j2k"
+              }
+            ],
+            "enabled": true
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "",
+          "id": "1jwspka",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "Alseptum_",
+          "discussion_type": null,
+          "num_comments": 66,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1jwspka/n8n_the_best_tool_for_small_business/",
+          "stickied": false,
+          "url": "https://i.redd.it/h3jf3alo58ue1.jpeg",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1744385513,
+          "num_crossposts": 0,
+          "media": null,
+          "is_video": false
+        }
+      },
+      {
+        "json": {
+          "approved_at_utc": null,
+          "subreddit": "n8n",
+          "selftext": "# I created a script to download all the n8n workflows from the n8n website so I could use them locally,  I added all the workflows I could find on git too, so I made a repo with 1000+ workflows for myself but if it benefits others why not...  so have fun feel free to start and use whenever you need. I will add more in a few weeks :) meanwhile enjoy those if it helps anyone\n\ndisclaimer : I didn't create any of those workflows. use at your own risk. check them.\n\n[https://github.com/Zie619/n8n-workflows](https://github.com/Zie619/n8n-workflows)\n\n",
+          "author_fullname": "t2_4k6u7rwb",
+          "saved": false,
+          "mod_reason_title": null,
+          "gilded": 0,
+          "clicked": false,
+          "title": "All of N8N workflows I could find (1000+) 😋 enjoy !",
+          "link_flair_richtext": [],
+          "subreddit_name_prefixed": "r/n8n",
+          "hidden": false,
+          "pwls": 6,
+          "link_flair_css_class": "",
+          "downs": 0,
+          "thumbnail_height": null,
+          "top_awarded_type": null,
+          "hide_score": false,
+          "name": "t3_1kx9u01",
+          "quarantine": false,
+          "link_flair_text_color": "dark",
+          "upvote_ratio": 0.98,
+          "author_flair_background_color": null,
+          "subreddit_type": "public",
+          "ups": 576,
+          "total_awards_received": 0,
+          "media_embed": {},
+          "thumbnail_width": null,
+          "author_flair_template_id": null,
+          "is_original_content": false,
+          "user_reports": [],
+          "secure_media": null,
+          "is_reddit_media_domain": false,
+          "is_meta": false,
+          "category": null,
+          "secure_media_embed": {},
+          "link_flair_text": "Workflow - Code Included",
+          "can_mod_post": false,
+          "score": 576,
+          "approved_by": null,
+          "is_created_from_ads_ui": false,
+          "author_premium": false,
+          "thumbnail": "self",
+          "edited": false,
+          "author_flair_css_class": null,
+          "author_flair_richtext": [],
+          "gildings": {},
+          "post_hint": "self",
+          "content_categories": null,
+          "is_self": true,
+          "mod_note": null,
+          "created": 1748412569,
+          "link_flair_type": "text",
+          "wls": 6,
+          "removed_by_category": null,
+          "banned_by": null,
+          "author_flair_type": "text",
+          "domain": "self.n8n",
+          "allow_live_comments": false,
+          "selftext_html": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;h1&gt;I created a script to download all the n8n workflows from the n8n website so I could use them locally,  I added all the workflows I could find on git too, so I made a repo with 1000+ workflows for myself but if it benefits others why not...  so have fun feel free to start and use whenever you need. I will add more in a few weeks :) meanwhile enjoy those if it helps anyone&lt;/h1&gt;\n\n&lt;p&gt;disclaimer : I didn&amp;#39;t create any of those workflows. use at your own risk. check them.&lt;/p&gt;\n\n&lt;p&gt;&lt;a href=\"https://github.com/Zie619/n8n-workflows\"&gt;https://github.com/Zie619/n8n-workflows&lt;/a&gt;&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+          "likes": null,
+          "suggested_sort": null,
+          "banned_at_utc": null,
+          "view_count": null,
+          "archived": false,
+          "no_follow": false,
+          "is_crosspostable": true,
+          "pinned": false,
+          "over_18": false,
+          "preview": {
+            "images": [
+              {
+                "source": {
+                  "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?auto=webp&amp;s=771849a96b04997689e13f01fd06ef26c5d22119",
+                  "width": 1200,
+                  "height": 600
+                },
+                "resolutions": [
+                  {
+                    "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?width=108&amp;crop=smart&amp;auto=webp&amp;s=aaa13860751cb7c05e6b55ee1ba42bbe7ebda3cd",
+                    "width": 108,
+                    "height": 54
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?width=216&amp;crop=smart&amp;auto=webp&amp;s=2c2f9d0c77403b63103fd92ab677232fe5bc70e3",
+                    "width": 216,
+                    "height": 108
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?width=320&amp;crop=smart&amp;auto=webp&amp;s=9e5c1ca1c457b2c35e46e3e511f4396b9c590116",
+                    "width": 320,
+                    "height": 160
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=6e66605c9ce3a2522f181b835dc181466fb087de",
+                    "width": 640,
+                    "height": 320
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?width=960&amp;crop=smart&amp;auto=webp&amp;s=e3a5c9df20b922f666494ff255c4ae96c157b351",
+                    "width": 960,
+                    "height": 480
+                  },
+                  {
+                    "url": "https://external-preview.redd.it/9efJqVzC_6qAyxunspEIo8mV9N5P917ARziRyMRwoAI.jpg?width=1080&amp;crop=smart&amp;auto=webp&amp;s=169fc41e581e450956acc55328a9f7878461eb69",
+                    "width": 1080,
+                    "height": 540
+                  }
+                ],
+                "variants": {},
+                "id": "VzHYQaRjPGaiL-zoF-M8pmceZ1_0fMBRTDNp_lNJ7AA"
+              }
+            ],
+            "enabled": false
+          },
+          "all_awardings": [],
+          "awarders": [],
+          "media_only": false,
+          "link_flair_template_id": "462a7568-1b95-11f0-9d03-5e24bd497166",
+          "can_gild": false,
+          "spoiler": false,
+          "locked": false,
+          "author_flair_text": null,
+          "treatment_tags": [],
+          "visited": false,
+          "removed_by": null,
+          "num_reports": null,
+          "distinguished": null,
+          "subreddit_id": "t5_36pcjp",
+          "author_is_blocked": false,
+          "mod_reason_by": null,
+          "removal_reason": null,
+          "link_flair_background_color": "#00e1ff",
+          "id": "1kx9u01",
+          "is_robot_indexable": true,
+          "report_reasons": null,
+          "author": "eliadkid",
+          "discussion_type": null,
+          "num_comments": 64,
+          "send_replies": true,
+          "contest_mode": false,
+          "mod_reports": [],
+          "author_patreon_flair": false,
+          "author_flair_text_color": null,
+          "permalink": "/r/n8n/comments/1kx9u01/all_of_n8n_workflows_i_could_find_1000_enjoy/",
+          "stickied": false,
+          "url": "https://www.reddit.com/r/n8n/comments/1kx9u01/all_of_n8n_workflows_i_could_find_1000_enjoy/",
+          "subreddit_subscribers": 77034,
+          "created_utc": 1748412569,
+          "num_crossposts": 5,
+          "media": null,
+          "is_video": false
+        }
+      }
+    ],
+    "OpenAI": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "yes",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "no",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "yes",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "yes",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "no",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "yes",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "no",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      },
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "yes",
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Reddit \"n8n real-world project\"",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Reddit \"n8n workflow examples\"": {
+      "main": [
+        []
+      ]
+    },
+    "Reddit": {
+      "main": [
+        []
+      ]
+    },
+    "Reddit \"n8n best practices\"": {
+      "main": [
+        []
+      ]
+    },
+    "Reddit \"n8n real-world project\"": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8c23c00f-43c8-419f-82d9-2cd6cc3b028d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "529d3bc8e17069f24d690f96cc5ee9be68d03f7366bb114ddb76b5c3e8f797b0"
+  },
+  "id": "UFpjN9NqSWPeSmmH",
+  "tags": []
+}
